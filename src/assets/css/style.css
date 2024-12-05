@@ -1,0 +1,10 @@
+tbody tr:hover {
+    background-color: lightblue;
+}
+
+tbody td {
+    border: dotted 1px;
+}
+body {
+    box-sizing: border-box;
+}
