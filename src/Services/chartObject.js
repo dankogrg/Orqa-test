@@ -243,4 +243,5 @@ export const getGraphData = async () => {
     }
 
     console.log(tree);
+    return tree;
 };
