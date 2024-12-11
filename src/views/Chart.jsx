@@ -1,10 +1,19 @@
-import { useEffect, useState } from 'react';
+import { Children, useEffect, useState } from 'react';
 import { getGraphData } from '../Services/chartObject';
 import { OrganizationChart } from 'primereact/organizationchart';
 
-const Chart = () => {
+export default function Chart() {
     const [selection, setSelection] = useState([]);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState([
+        {
+            expanded: true,
+            data: {
+                firstName: '',
+                lastName: '',
+            },
+            Children: [],
+        },
+    ]);
 
     useEffect(() => {
         try {
@@ -12,7 +21,7 @@ const Chart = () => {
                 .then((result) => setData(result))
                 .catch((error) => console.warn(error));
         } catch (error) {
-            console.log(error);
+            console.warn(error);
         }
     }, []);
 
@@ -27,7 +36,7 @@ const Chart = () => {
                         src={node.data.imageUrl}
                         className="mb-3 w-3rem h-3rem"
                     />
-                    <span className="font-bold mb-2">{`${node.firstName} ${node.lastName}`}</span>
+                    <span className="font-bold mb-2">{`${node.data.firstName} ${node.data.lastName} `}</span>
                     <span>{node.data.position}</span>
                 </div>
             </div>
@@ -45,6 +54,4 @@ const Chart = () => {
             />
         </div>
     );
-};
-
-export default Chart;
+}

@@ -22,17 +22,19 @@ export const getGraphData = async () => {
     let map = {};
     let rootArray = [];
     for (let entry of employeeList) {
-        map[entry.id] = { expanded: false, data: entry };
-    }
-
-    for (let entry of employeeList) {
-        entry.subordinates = [];
+        map[entry.id] = { expanded: false, data: entry, children: [] };
     }
 
     console.log(map);
 
-    let root = { expanded: false, data: {} };
-    root.data = employeeList.find((x) => x.manager_id == null);
+    // let root = { expanded: false, data: {}, children: [] };
+    // root.data = employeeList.find((x) => x.manager_id == null);
+    let root;
+    for (const element in map) {
+        if (map[element].data.manager_id == null) {
+            root = map[element];
+        }
+    }
 
     if (root == null) return null;
 
@@ -40,14 +42,13 @@ export const getGraphData = async () => {
         if (entry === root.data) continue;
         let parent = map[entry.manager_id];
 
-        parent.data.subordinates.push(map[entry.id]);
+        parent.children.push(map[entry.id]);
     }
     root.expanded = true;
-    for (const entry of root.data.subordinates) {
+    for (const entry of root.children) {
         entry.expanded = true;
     }
-    rootArray.push(root);
-    console.log(rootArray);
 
+    rootArray.push(root);
     return rootArray;
 };
