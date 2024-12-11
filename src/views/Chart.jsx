@@ -1,4 +1,4 @@
-import { Children, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getGraphData } from '../Services/chartObject';
 import { OrganizationChart } from 'primereact/organizationchart';
 
@@ -7,6 +7,7 @@ export default function Chart() {
     const [data, setData] = useState([
         {
             expanded: true,
+            className: 'bg-indigo-500 text-white',
             data: {
                 firstName: '',
                 lastName: '',
@@ -32,6 +33,7 @@ export default function Chart() {
             <div className="flex flex-column">
                 <div className="flex flex-column align-items-center">
                     <img
+                        style={{ borderRadius: '50%' }}
                         alt={`${node.data.firstName} ${node.data.lastName}`}
                         src={node.data.imageUrl}
                         className="mb-3 w-3rem h-3rem"
