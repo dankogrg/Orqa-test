@@ -6,7 +6,7 @@ export const getAllEmployees = async () => {
 
     let result;
     do {
-        result = await getEmployees(i);
+        result = await getEmployees('?page=' + i);
         graphData.push(result.data);
         i++;
     } while (result.data.length != 0);
@@ -25,10 +25,6 @@ export const getGraphData = async () => {
         map[entry.id] = { expanded: false, data: entry, children: [] };
     }
 
-    console.log(map);
-
-    // let root = { expanded: false, data: {}, children: [] };
-    // root.data = employeeList.find((x) => x.manager_id == null);
     let root;
     for (const element in map) {
         if (map[element].data.manager_id == null) {

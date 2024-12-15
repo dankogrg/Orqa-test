@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import '../assets/css/style.css';
-import About from './About';
 import { Button, Modal } from 'react-bootstrap';
 
 const EmployeeDisplay = ({
@@ -14,21 +13,7 @@ const EmployeeDisplay = ({
     hideModal,
     isLoaded,
     putEmployee,
-    orderList,
 }: any) => {
-    const trDiv = {
-        border: 'solid 3px',
-        height: '120px',
-    };
-
-    const tableDiv = {
-        overflow: 'auto',
-        height: `${tableHeight}px`,
-        border: 'solid 5px',
-        margin: '20px',
-        fontSize: '13px',
-    };
-
     useEffect(() => {
         window.addEventListener('resize', onResize);
         window.addEventListener('scroll', listLoader);
@@ -43,7 +28,12 @@ const EmployeeDisplay = ({
 
     return (
         <div>
-            <div className="table-responsive" style={tableDiv} ref={scrollRef} onScroll={listLoader}>
+            <div
+                className="table-responsive tableDiv"
+                style={{ height: `${tableHeight}px` }}
+                ref={scrollRef}
+                onScroll={listLoader}
+            >
                 <table className="table table-striped" style={{ marginBottom: '0' }}>
                     <thead>
                         <tr
@@ -63,9 +53,7 @@ const EmployeeDisplay = ({
                             <th>Contact Number</th>
                             <th>Position</th>
                             <th>Details</th>
-                            <th>
-                                <Button onClick={orderList}>Manager ID</Button>
-                            </th>
+                            <th>Manager ID</th>
                             <th>Created</th>
                             <th>Last Update</th>
                         </tr>
@@ -73,7 +61,7 @@ const EmployeeDisplay = ({
 
                     <tbody>
                         {employees.map((employeeData: any, index: any) => (
-                            <tr key={index} style={trDiv} ref={myRef}>
+                            <tr key={index} className="trDiv" ref={myRef}>
                                 <td>
                                     <img
                                         style={{ minWidth: '130px', maxWidth: '140px' }}

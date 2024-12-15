@@ -33,7 +33,7 @@ export default function Chart() {
             <div className="flex flex-column">
                 <div className="flex flex-column align-items-center">
                     <img
-                        style={{ borderRadius: '50%' }}
+                        style={{ borderRadius: '50%', border: '0px' }}
                         alt={`${node.data.firstName} ${node.data.lastName}`}
                         src={node.data.imageUrl}
                         className="mb-3 w-3rem h-3rem"
@@ -46,7 +46,7 @@ export default function Chart() {
     };
 
     return (
-        <div className="card overflow-x-auto">
+        <div className="card ">
             <OrganizationChart
                 value={data}
                 selectionMode="multiple"

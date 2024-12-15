@@ -8,3 +8,16 @@ tbody td {
 body {
     box-sizing: border-box;
 }
+
+.trDiv {
+    border: 'solid 3px';
+    height: '120px';
+}
+
+.tableDiv {
+    overflow: 'auto';
+
+    border: 'solid 5px';
+    margin: '20px';
+    font-size: '13px';
+}

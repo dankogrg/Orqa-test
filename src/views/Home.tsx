@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { getEmployees } from '../utils/fetch';
 import EmployeeDisplay from '../components/EmployeeDisplay';
+import { log } from 'node:console';
 
 export default function Home() {
     const tableHeight: any = 650;
@@ -21,7 +22,7 @@ export default function Home() {
 
     useEffect(() => {
         try {
-            getEmployees(1)
+            getEmployees('?page=' + 1)
                 .then((result) => setEmployees(result.data))
                 .catch((error) => console.warn(error));
         } catch (error) {
@@ -42,7 +43,7 @@ export default function Home() {
 
         if (scrollHeight / (height + 10) > 8 + 10 * index) {
             try {
-                getEmployees(index + 2).then((result) => {
+                getEmployees('?page=' + (index + 2)).then((result) => {
                     setEmployees(employees.concat(result.data));
                 });
 
@@ -64,9 +65,7 @@ export default function Home() {
         <>
             <EmployeeDisplay
                 employees={employees}
-                height={height}
-                scrollHeight={scrollHeight}
-                onResize={onResize}
+                onResize={() => {}}
                 myRef={myRef}
                 scrollRef={scrollRef}
                 tableHeight={tableHeight}
@@ -75,7 +74,6 @@ export default function Home() {
                 showModal={showModal}
                 isLoaded={isLoaded}
                 putEmployee={putEmployee}
-                orderList={orderList}
             />
         </>
     );
