@@ -29,12 +29,12 @@ export default function Nav({ input, resetInput, handleinput }) {
                 <ul>
                     <Button variant="outline-info">
                         <Link style={myStyle} to="/" className={`nav-link`}>
-                            Customers
+                            Employees
                         </Link>
                     </Button>
                     <Button variant="outline-warning">
                         <Link to="/chart" style={myStyle} className={`nav-link`}>
-                            Hierarchy
+                            Structure
                         </Link>
                     </Button>
                 </ul>

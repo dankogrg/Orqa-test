@@ -13,6 +13,8 @@ const EmployeeDisplay = ({
     hideModal,
     isLoaded,
     putEmployee,
+    reverseOrder,
+    orderList,
 }: any) => {
     useEffect(() => {
         window.addEventListener('resize', onResize);
@@ -25,6 +27,10 @@ const EmployeeDisplay = ({
         };
     }),
         [];
+    const handleClick = () => {
+        const state = reverseOrder();
+        orderList(state, employees);
+    };
 
     return (
         <div>
@@ -47,7 +53,11 @@ const EmployeeDisplay = ({
                         >
                             <th>Image</th>
                             <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>
+                                <Button variant="secondary" onClick={handleClick}>
+                                    Last Name
+                                </Button>
+                            </th>
                             <th>Address</th>
                             <th>Email</th>
                             <th>Contact Number</th>
@@ -71,7 +81,10 @@ const EmployeeDisplay = ({
                                     />
                                 </td>
                                 <td>{employeeData.firstName}</td>
-                                <td>{employeeData.lastName}</td>
+                                <td>
+                                    {employeeData.lastName}
+                                    {employeeData.id}
+                                </td>
                                 <td>{employeeData.adress}</td>
                                 <td>{employeeData.email}</td>
                                 <td>{employeeData.contactNumber}</td>
@@ -99,7 +112,7 @@ const EmployeeDisplay = ({
             </div>
             <Modal show={isLoaded} onHide={hideModal}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>Details</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>{putEmployee}</Modal.Body>
                 <Modal.Footer>

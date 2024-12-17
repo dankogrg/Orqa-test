@@ -7,12 +7,9 @@ export default function Chart() {
     const [data, setData] = useState([
         {
             expanded: true,
-            className: 'bg-indigo-500 text-white',
-            data: {
-                firstName: '',
-                lastName: '',
-            },
-            Children: [],
+
+            data: { name: 'Ann' },
+            children: [],
         },
     ]);
 
@@ -25,8 +22,6 @@ export default function Chart() {
             console.warn(error);
         }
     }, []);
-
-    console.log(data);
 
     const nodeTemplate = (node) => {
         return (
@@ -46,7 +41,7 @@ export default function Chart() {
     };
 
     return (
-        <div className="card ">
+        <div className="card">
             <OrganizationChart
                 value={data}
                 selectionMode="multiple"
