@@ -14,7 +14,6 @@ export default function Home() {
     const [index, setIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [putEmployee, setPutEmployee] = useState(undefined);
-    const [ascension, setAscension] = useState(false);
 
     const onResize = () => {
         if (myRef.current) setHeight(myRef.current.clientHeight);
@@ -49,23 +48,15 @@ export default function Home() {
 
                 setIndex(index + 1);
             } catch (error) {}
+            console.log(employees);
         }
-    };
-
-    const orderList = () => {
-        if (ascension == false) {
-            const sortedList = [...employees].sort((a, b) => a.manager_id - b.manager_id);
-            setEmployees(sortedList);
-        }
-
-        setAscension(!ascension);
     };
 
     return (
         <>
             <EmployeeDisplay
                 employees={employees}
-                onResize={() => {}}
+                onResize={onResize}
                 myRef={myRef}
                 scrollRef={scrollRef}
                 tableHeight={tableHeight}

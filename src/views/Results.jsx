@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getEmployees } from '../utils/fetch';
 
 import EmployeeDisplay from '../components/EmployeeDisplay';
+import { Button } from 'react-bootstrap';
 
 const Results = ({ searchTerm }) => {
     const [searchResult, setSearchResult] = useState([]);
@@ -23,7 +24,6 @@ const Results = ({ searchTerm }) => {
         setIsLoaded(true);
         setPutEmployee(employee);
     };
-    console.log('b');
 
     return (
         <div>
@@ -41,6 +41,7 @@ const Results = ({ searchTerm }) => {
                     showModal={showModal}
                     isLoaded={isLoaded}
                     putEmployee={putEmployee}
+                    chartButton={true}
                 />
             )}
         </div>

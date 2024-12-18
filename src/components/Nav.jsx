@@ -1,7 +1,6 @@
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { ReactComponent as MySVG } from '../assets/svg/icons8-search.svg';
 import { Button, FloatingLabel, Form, InputGroup } from 'react-bootstrap';
-import { useState } from 'react';
 
 const myStyle = {
     display: 'inline',
@@ -27,12 +26,12 @@ export default function Nav({ input, resetInput, handleinput }) {
         <div>
             <div className=" container navbar navbar-expand-lg bg-light border-bottom border-body">
                 <ul>
-                    <Button variant="outline-info">
+                    <Button variant="outline-info" style={{ margin: '5px' }}>
                         <Link style={myStyle} to="/" className={`nav-link`}>
                             Customers
                         </Link>
                     </Button>
-                    <Button variant="outline-warning">
+                    <Button variant="outline-warning" style={{ margin: '5px' }}>
                         <Link to="/chart" style={myStyle} className={`nav-link`}>
                             Hierarchy
                         </Link>
@@ -40,7 +39,7 @@ export default function Nav({ input, resetInput, handleinput }) {
                 </ul>
 
                 <Form onSubmit={handleSubmit}>
-                    <InputGroup style={{ width: '260px', height: '51px ' }}>
+                    <InputGroup style={{ width: '260px', height: '51px ', margin: '5px' }}>
                         <FloatingLabel
                             controlId="floatingInput"
                             label="Search employees by name..."

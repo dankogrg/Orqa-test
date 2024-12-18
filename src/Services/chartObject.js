@@ -22,7 +22,7 @@ export const getGraphData = async () => {
     let map = {};
     let rootArray = [];
     for (let entry of employeeList) {
-        map[entry.id] = { expanded: false, data: entry, children: [] };
+        map[entry.id] = { expanded: true, data: entry, children: [] };
     }
 
     let root;
