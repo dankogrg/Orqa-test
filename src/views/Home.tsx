@@ -3,7 +3,7 @@ import { getEmployees } from '../utils/fetch';
 import EmployeeDisplay from '../components/EmployeeDisplay';
 
 let i = 0;
-let currentState: any;
+let currentState: any = 'neutral';
 let currentList: any;
 
 export default function Home() {
@@ -79,7 +79,6 @@ export default function Home() {
             orderList(currentState, currentList);
 
             console.log(currentState);
-            setEmployees(currentList);
         }
     };
 
