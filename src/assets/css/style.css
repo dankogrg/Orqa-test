@@ -2,7 +2,7 @@
     background-color: lightblue;
 }
 
-tbody td {
+#employeerow td {
     border: dotted 1px;
 }
 body {

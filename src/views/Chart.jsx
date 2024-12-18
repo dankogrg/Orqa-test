@@ -86,7 +86,7 @@ export default function Chart(props) {
                 style={
                     node.data.firstName == firstName
                         ? { backgroundColor: 'indianred', borderRadius: '5%' }
-                        : { backgroundColor: 'white' }
+                        : { backgroundColor: 'transparent' }
                 }
             >
                 <div className="flex flex-column align-items-center">
@@ -111,6 +111,7 @@ export default function Chart(props) {
             className="card"
             onWheel={handleWheel}
             style={{
+                border: 'none',
                 width: '100%',
                 height: '100%',
                 display: 'flex',
