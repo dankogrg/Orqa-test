@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import '../assets/css/style.css';
+import { useEffect } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import Chart from '../views/Chart';
+import '../assets/css/style.css';
 
 const EmployeeDisplay = ({
     employees,
@@ -15,16 +15,10 @@ const EmployeeDisplay = ({
     isLoaded,
     putEmployee,
     chartButton,
+    chartMode,
+    firstName,
+    handleClick,
 }: any) => {
-    const [chartMode, setChartMode] = useState(false);
-    const [firstName, setFirtsName] = useState(undefined);
-
-    const handleClick = (name: any) => {
-        if (!chartMode) {
-            setFirtsName(name);
-        }
-        setChartMode(!chartMode);
-    };
     useEffect(() => {
         window.addEventListener('resize', onResize);
         window.addEventListener('scroll', listLoader);
@@ -68,7 +62,6 @@ const EmployeeDisplay = ({
                                 <th>Manager ID</th>
                                 <th>Created</th>
                                 <th>Last Update</th>
-                                {chartButton == true && <th>Position option</th>}
                             </tr>
                         </thead>
 
@@ -84,14 +77,23 @@ const EmployeeDisplay = ({
                                         />
                                     </td>
                                     <td>{employeeData.firstName}</td>
-                                    <td>
-                                        {employeeData.lastName} " " {employeeData.id}
-                                    </td>
+                                    <td>{employeeData.lastName}</td>
                                     <td>{employeeData.adress}</td>
                                     <td>{employeeData.email}</td>
                                     <td>{employeeData.contactNumber}</td>
-                                    <td>{employeeData.position}</td>
                                     <td>
+                                        {employeeData.position}
+                                        {chartButton == true && (
+                                            <Button
+                                                variant="success"
+                                                style={{ margin: '5px' }}
+                                                onClick={() => handleClick(employeeData.firstName)}
+                                            >
+                                                Show position
+                                            </Button>
+                                        )}
+                                    </td>
+                                    <td style={{ verticalAlign: 'middle' }}>
                                         <Button variant="primary" onClick={() => showModal(employeeData.about)}>
                                             View
                                         </Button>
@@ -107,16 +109,6 @@ const EmployeeDisplay = ({
                                             ' ' +
                                             new Date(employeeData.updated_at).toLocaleTimeString()}
                                     </td>
-                                    {chartButton == true && (
-                                        <td>
-                                            <Button
-                                                variant="primary"
-                                                onClick={() => handleClick(employeeData.firstName)}
-                                            >
-                                                Show position
-                                            </Button>
-                                        </td>
-                                    )}
                                 </tr>
                             ))}
                         </tbody>

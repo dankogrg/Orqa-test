@@ -25,7 +25,7 @@ export default function Nav({ input, resetInput, handleinput }) {
     return (
         <div>
             <div className=" container navbar navbar-expand-lg bg-light border-bottom border-body">
-                <ul>
+                <ul style={{ display: 'flex' }}>
                     <Button variant="outline-info" style={{ margin: '5px' }}>
                         <Link style={myStyle} to="/" className={`nav-link`}>
                             Customers
@@ -36,32 +36,30 @@ export default function Nav({ input, resetInput, handleinput }) {
                             Hierarchy
                         </Link>
                     </Button>
+                    <Form onSubmit={handleSubmit}>
+                        <InputGroup style={{ margin: '5px' }}>
+                            <FloatingLabel
+                                controlId="floatingInput"
+                                label="Search employees by name..."
+                                style={{ fontSize: '12px', marginBottom: '0px' }}
+                            >
+                                <Form.Control
+                                    type="search"
+                                    style={{ height: '40px' }}
+                                    value={input}
+                                    onChange={handleinput}
+                                />
+                            </FloatingLabel>
+                            <Button
+                                variant="light"
+                                type="submit"
+                                style={{ height: '40px ', padding: 'px', marginLeft: '0px' }}
+                            >
+                                <MySVG />
+                            </Button>
+                        </InputGroup>
+                    </Form>
                 </ul>
-
-                <Form onSubmit={handleSubmit}>
-                    <InputGroup style={{ width: '260px', height: '51px ', margin: '5px' }}>
-                        <FloatingLabel
-                            controlId="floatingInput"
-                            label="Search employees by name..."
-                            style={{ fontSize: '12px', marginBottom: '0px' }}
-                        >
-                            <Form.Control
-                                type="search"
-                                placeholder="Enter search term"
-                                style={{ height: '40px' }}
-                                value={input}
-                                onChange={handleinput}
-                            />
-                        </FloatingLabel>
-                        <Button
-                            variant="light"
-                            type="submit"
-                            style={{ height: '40px ', padding: 'px', marginLeft: '0px' }}
-                        >
-                            <MySVG />
-                        </Button>
-                    </InputGroup>
-                </Form>
             </div>
             <Outlet />
         </div>

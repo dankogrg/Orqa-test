@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { getEmployees } from '../utils/fetch';
 import EmployeeDisplay from '../components/EmployeeDisplay';
-import { log } from 'node:console';
+import 'bootstrap/scss/bootstrap.scss';
+let i = 0;
 
 export default function Home() {
     const tableHeight: any = 650;
@@ -9,7 +10,7 @@ export default function Home() {
     const scrollRef: any = useRef(null);
 
     const [employees, setEmployees]: any = useState([]);
-    const [height, setHeight] = useState(0);
+    const [height, setHeight] = useState(650);
     const [scrollHeight, setScrollHeight] = useState(tableHeight);
     const [index, setIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -38,16 +39,18 @@ export default function Home() {
     };
 
     const listLoader = () => {
-        if (scrollRef.current) setScrollHeight(tableHeight + scrollRef.current.scrollTop);
+        if (scrollRef.current) {
+            setScrollHeight(tableHeight + scrollRef.current.scrollTop);
+        }
 
-        if (scrollHeight / (height + 10) > 8 + 10 * index) {
+        if (scrollHeight / (height - 10) > 8 + 10 * index) {
             try {
-                getEmployees('?page=' + (index + 2)).then((result) => {
+                getEmployees('?page=' + (i + 2)).then((result) => {
                     setEmployees(employees.concat(result.data));
                 });
-
-                setIndex(index + 1);
             } catch (error) {}
+            ++i;
+            setIndex(i);
             console.log(employees);
         }
     };

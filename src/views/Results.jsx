@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
 import { getEmployees } from '../utils/fetch';
-
 import EmployeeDisplay from '../components/EmployeeDisplay';
-import { Button } from 'react-bootstrap';
 
 const Results = ({ searchTerm }) => {
     const [searchResult, setSearchResult] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
     const [putEmployee, setPutEmployee] = useState(undefined);
+    const [chartMode, setChartMode] = useState(false);
+    const [firstName, setFirtsName] = useState(undefined);
+
+    const handleClick = (name) => {
+        if (!chartMode) {
+            setFirtsName(name);
+        }
+        setChartMode(!chartMode);
+    };
 
     useEffect(() => {
         try {
@@ -15,6 +22,7 @@ const Results = ({ searchTerm }) => {
                 .then((response) => setSearchResult(response.data))
                 .catch(error);
         } catch (error) {}
+        setChartMode(false);
     }, [searchTerm]);
 
     const hideModal = () => {
@@ -27,21 +35,23 @@ const Results = ({ searchTerm }) => {
 
     return (
         <div>
-            {searchResult.length == 0 ? (
-                <div style={{ color: 'red', fontSize: '34px', textAlign: 'center' }}>No results</div>
+            {searchResult.length == 0 || !searchTerm ? (
+                <div style={{ color: 'red', fontSize: '34px', textAlign: 'center' }}>
+                    No results. Enter search term.
+                </div>
             ) : (
                 <EmployeeDisplay
                     employees={searchResult}
                     onResize={() => {}}
-                    myRef={null}
-                    scrollRef={null}
                     tableHeight={650}
-                    listLoader={null}
                     hideModal={hideModal}
                     showModal={showModal}
                     isLoaded={isLoaded}
                     putEmployee={putEmployee}
                     chartButton={true}
+                    handleClick={handleClick}
+                    firstName={firstName}
+                    chartMode={chartMode}
                 />
             )}
         </div>
