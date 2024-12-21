@@ -26,7 +26,16 @@ const Results = ({ searchTerm }) => {
     return (
         <div>
             {searchResult.length == 0 || !searchTerm ? (
-                <div style={{ height: '400px', color: 'red', fontSize: '34px', textAlign: 'center' }}>
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        height: '400px',
+                        color: 'red',
+                        fontSize: '34px',
+                    }}
+                >
                     No results. Enter search term.
                 </div>
             ) : (

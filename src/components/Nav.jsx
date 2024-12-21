@@ -38,7 +38,7 @@ export default function Nav({ input, resetInput, handleinput }) {
                 className=" container navbar navbar-expand-lg bg-light border-bottom border-body"
             >
                 <ul style={{ display: 'flex' }}>
-                    <Button rounded label="Customers" style={myStyle} raised severity="info" onClick={handleReload} />
+                    <Button rounded label="Employees" style={myStyle} raised severity="info" onClick={handleReload} />
                     <Button
                         label="Hierarchy"
                         style={myStyle}

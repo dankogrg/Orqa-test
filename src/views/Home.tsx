@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { getEmployees } from '../utils/fetch';
 import EmployeeDisplay from '../components/EmployeeDisplay';
-import { ProgressSpinner } from 'primereact/progressspinner';
 
 let i = 0;
 
@@ -9,14 +8,12 @@ export default function Home() {
     const tableHeight: any = 650;
     const myRef: any = useRef(null);
     const scrollRef: any = useRef(null);
-
     const [employees, setEmployees]: any = useState([]);
     const [height, setHeight] = useState(650);
     const [scrollHeight, setScrollHeight] = useState(tableHeight);
     const [index, setIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [putEmployee, setPutEmployee] = useState(undefined);
-    const [navDefault, setNavDefault] = useState(false);
 
     useEffect(() => {
         try {
@@ -26,10 +23,7 @@ export default function Home() {
         } catch (error) {
             console.warn(error);
         }
-        setNavDefault(true);
     }, []);
-
-    const handleDefault = () => setNavDefault(!navDefault);
 
     const onResize = () => {
         if (myRef.current) setHeight(myRef.current.clientHeight);
@@ -56,7 +50,6 @@ export default function Home() {
             } catch (error) {}
             ++i;
             setIndex(i);
-            console.log(employees);
         }
     };
 
@@ -73,8 +66,6 @@ export default function Home() {
                 showModal={showModal}
                 isLoaded={isLoaded}
                 putEmployee={putEmployee}
-                navDefault={navDefault}
-                handleDefault={handleDefault}
             />
         </>
     );

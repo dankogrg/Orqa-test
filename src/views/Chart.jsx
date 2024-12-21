@@ -8,6 +8,12 @@ export default function Chart(props) {
 
     const [selection, setSelection] = useState([]);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [scale, setScale] = useState(1);
+    const [isRKeyPressed, setIsRKeyPressed] = useState(false);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startPosition, setStartPosition] = useState(null);
+    const [position, setPosition] = useState({ x: 0, y: 0 });
+    const chartRef = useRef(null);
     const [data, setData] = useState([
         {
             expanded: true,
@@ -18,12 +24,6 @@ export default function Chart(props) {
             Children: [],
         },
     ]);
-    const [scale, setScale] = useState(1);
-    const [isRKeyPressed, setIsRKeyPressed] = useState(false);
-    const [isDragging, setIsDragging] = useState(false);
-    const [startPosition, setStartPosition] = useState(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-    const chartRef = useRef(null);
 
     const adjustScaleToFit = () => {
         if (chartRef.current) {

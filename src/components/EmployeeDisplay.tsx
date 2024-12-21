@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-
 import Chart from '../views/Chart';
 import '../assets/css/style.css';
 import { Button } from 'primereact/button';
-
 import { Dialog } from 'primereact/dialog';
 
 const EmployeeDisplay = ({
@@ -17,8 +15,6 @@ const EmployeeDisplay = ({
     hideModal,
     isLoaded,
     putEmployee,
-    navDefault,
-    handleDefault,
 }: any) => {
     const [chartMode, setChartMode] = useState(false);
     const [firstName, setFirtsName] = useState(undefined);
@@ -55,11 +51,12 @@ const EmployeeDisplay = ({
                         <thead>
                             <tr
                                 style={{
+                                    zIndex: '256',
                                     height: '50px',
                                     position: 'sticky',
                                     top: '0',
                                     backgroundColor: 'lightgreen',
-                                    border: 'solid 3px',
+                                    boxShadow: '0 2px 2px rgba(0, 0, 0, 1)',
                                 }}
                             >
                                 <th>Image</th>
@@ -70,9 +67,6 @@ const EmployeeDisplay = ({
                                 <th>Contact Number</th>
                                 <th>Position</th>
                                 <th>Details</th>
-                                <th>Manager ID</th>
-                                <th>Created</th>
-                                <th>Last Update</th>
                             </tr>
                         </thead>
 
@@ -92,29 +86,18 @@ const EmployeeDisplay = ({
                                     <td>{employeeData.adress}</td>
                                     <td>{employeeData.email}</td>
                                     <td>{employeeData.contactNumber}</td>
-                                    <td style={{ textAlign: 'center', maxWidth: '165px' }}>
-                                        {employeeData.position}
+                                    <td style={{ textAlign: 'center', maxWidth: '155px' }}>
+                                        <span style={{ display: 'block', margin: '7px' }}>{employeeData.position}</span>
                                         <Button
                                             label="Show position"
                                             severity="success"
                                             raised
-                                            style={{ margin: '5px' }}
+                                            style={{ margin: '5px', padding: '5px' }}
                                             onClick={() => handleClick(employeeData.firstName)}
                                         />
                                     </td>
                                     <td style={{ verticalAlign: 'middle' }}>
                                         <Button label="View" raised onClick={() => showModal(employeeData.about)} />
-                                    </td>
-                                    <td>{employeeData.manager_id}</td>
-                                    <td>
-                                        {new Date(employeeData.created_at).toLocaleDateString() +
-                                            ' ' +
-                                            new Date(employeeData.created_at).toLocaleTimeString()}
-                                    </td>
-                                    <td>
-                                        {new Date(employeeData.updated_at).toLocaleDateString() +
-                                            ' ' +
-                                            new Date(employeeData.updated_at).toLocaleTimeString()}
                                     </td>
                                 </tr>
                             ))}

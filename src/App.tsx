@@ -8,7 +8,6 @@ import { useState } from 'react';
 const App = (): JSX.Element => {
     const [input, setInput] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-    const [isFound, setIsFound] = useState(false);
 
     const handleinput = (e: any) => {
         setInput(e.target.value);
