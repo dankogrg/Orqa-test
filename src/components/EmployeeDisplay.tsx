@@ -1,7 +1,10 @@
-import { useEffect } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+
 import Chart from '../views/Chart';
 import '../assets/css/style.css';
+import { Button } from 'primereact/button';
+
+import { Dialog } from 'primereact/dialog';
 
 const EmployeeDisplay = ({
     employees,
@@ -14,11 +17,12 @@ const EmployeeDisplay = ({
     hideModal,
     isLoaded,
     putEmployee,
-    chartButton,
-    chartMode,
-    firstName,
-    handleClick,
+    navDefault,
+    handleDefault,
 }: any) => {
+    const [chartMode, setChartMode] = useState(false);
+    const [firstName, setFirtsName] = useState(undefined);
+
     useEffect(() => {
         window.addEventListener('resize', onResize);
         window.addEventListener('scroll', listLoader);
@@ -30,6 +34,13 @@ const EmployeeDisplay = ({
         };
     }),
         [];
+
+    const handleClick = (name: any) => {
+        if (!chartMode) {
+            setFirtsName(name);
+        }
+        setChartMode(!chartMode);
+    };
 
     return (
         <div>
@@ -81,22 +92,18 @@ const EmployeeDisplay = ({
                                     <td>{employeeData.adress}</td>
                                     <td>{employeeData.email}</td>
                                     <td>{employeeData.contactNumber}</td>
-                                    <td>
+                                    <td style={{ textAlign: 'center', maxWidth: '165px' }}>
                                         {employeeData.position}
-                                        {chartButton == true && (
-                                            <Button
-                                                variant="success"
-                                                style={{ margin: '5px' }}
-                                                onClick={() => handleClick(employeeData.firstName)}
-                                            >
-                                                Show position
-                                            </Button>
-                                        )}
+                                        <Button
+                                            label="Show position"
+                                            severity="success"
+                                            raised
+                                            style={{ margin: '5px' }}
+                                            onClick={() => handleClick(employeeData.firstName)}
+                                        />
                                     </td>
                                     <td style={{ verticalAlign: 'middle' }}>
-                                        <Button variant="primary" onClick={() => showModal(employeeData.about)}>
-                                            View
-                                        </Button>
+                                        <Button label="View" raised onClick={() => showModal(employeeData.about)} />
                                     </td>
                                     <td>{employeeData.manager_id}</td>
                                     <td>
@@ -113,25 +120,23 @@ const EmployeeDisplay = ({
                             ))}
                         </tbody>
                     </table>
-                    <Modal show={isLoaded} onHide={hideModal}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Modal heading</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>{putEmployee}</Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="primary" onClick={hideModal}>
-                                Close
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                    <Dialog
+                        visible={isLoaded}
+                        onHide={hideModal}
+                        style={{ width: '50vw' }}
+                        modal
+                        header="Details"
+                        footer={<Button label="close" raised onClick={hideModal} />}
+                    >
+                        {putEmployee}
+                    </Dialog>
                 </div>
             )}
 
             {chartMode && (
                 <div>
-                    <Button onClick={handleClick} style={{ margin: '7px' }}>
-                        Back
-                    </Button>{' '}
+                    <Button label="Back" raised onClick={handleClick} style={{ margin: '7px' }} />
+
                     <Chart firstName={firstName} />
                 </div>
             )}

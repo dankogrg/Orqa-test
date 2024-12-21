@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { getEmployees } from '../utils/fetch';
 import EmployeeDisplay from '../components/EmployeeDisplay';
-import 'bootstrap/scss/bootstrap.scss';
+import { ProgressSpinner } from 'primereact/progressspinner';
+
 let i = 0;
 
 export default function Home() {
@@ -15,10 +16,7 @@ export default function Home() {
     const [index, setIndex] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
     const [putEmployee, setPutEmployee] = useState(undefined);
-
-    const onResize = () => {
-        if (myRef.current) setHeight(myRef.current.clientHeight);
-    };
+    const [navDefault, setNavDefault] = useState(false);
 
     useEffect(() => {
         try {
@@ -28,7 +26,14 @@ export default function Home() {
         } catch (error) {
             console.warn(error);
         }
+        setNavDefault(true);
     }, []);
+
+    const handleDefault = () => setNavDefault(!navDefault);
+
+    const onResize = () => {
+        if (myRef.current) setHeight(myRef.current.clientHeight);
+    };
 
     const hideModal = () => {
         setIsLoaded(false);
@@ -68,6 +73,8 @@ export default function Home() {
                 showModal={showModal}
                 isLoaded={isLoaded}
                 putEmployee={putEmployee}
+                navDefault={navDefault}
+                handleDefault={handleDefault}
             />
         </>
     );

@@ -144,7 +144,7 @@ export default function Chart(props) {
 
     return (
         <div>
-            <div style={{ textAlign: 'center', padding: '10px' }}>
+            <div style={{ textAlign: 'center', padding: '10px', backgroundColor: 'lightblue', margin: '0 5px' }}>
                 <p>
                     <b>
                         To zoom in or out hold "R" while moving the mouse wheel. <br />
@@ -157,10 +157,11 @@ export default function Chart(props) {
                 style={{
                     border: '2px solid',
                     padding: '15px',
-                    margin: '10px',
+                    margin: '5px',
                     alignItems: 'center',
                     overflow: 'hidden',
                     ...(!isLoaded && {
+                        height: '78vh',
                         display: 'flex',
                         justifyContent: 'center',
                     }),
