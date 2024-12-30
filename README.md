@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+For being able to use the batabase this progrem refers to, you need to install Docker and load the laravel API from this link:
+https://drive.google.com/file/d/1U46YT9pVsXyeJhyJBlIFFlJ2RHoXCW6d/view
+then, in your CLI run docker load --input {file-path} to load the api and after that docker run -p 8000:8000 {file-path} to run it. The Backend database should be accessible then in the browser on `http://localhost:8001/api/employees` and the webpage should be functionable
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
